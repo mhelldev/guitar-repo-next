@@ -40,7 +40,6 @@ export async function getServerSideProps() {
     let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
     // extract the data
     let data = await response.json();
-    console.log(data)
 
     return {
         props: {

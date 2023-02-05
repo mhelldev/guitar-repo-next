@@ -69,7 +69,7 @@ export default function PostCard(song: SongEntry) {
             <li>
                 <h3>{song.song} {song.artist}</h3>
                 <p>{song.style}</p>
-                <small>{new Date(song.createdAt).toLocaleDateString()}</small>
+                <small>{song.createdAt}</small>
                 <br />
                 {!song.published ? (
                     <button type="button" onClick={() => publishPost(song.id)}>
