@@ -1,7 +1,21 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function PostCard({ post } : any) {
+export type Style = 'Jazz' | 'Fingerpicking' | 'Blues' | 'Rock/Pop'
+
+export interface SongEntry {
+    id?: string
+    song: string
+    artist: string
+    style?: Style
+    progress?: number
+    youtube?: string
+    ultimateGuitar?: string
+    createdAt: string
+    published: boolean
+};
+
+export default function PostCard(song: SongEntry) {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const router = useRouter();
@@ -53,16 +67,16 @@ export default function PostCard({ post } : any) {
     return (
         <>
             <li>
-                <h3>{post.title}</h3>
-                <p>{post.content}</p>
-                <small>{new Date(post.createdAt).toLocaleDateString()}</small>
+                <h3>{song.song} {song.artist}</h3>
+                <p>{song.style}</p>
+                <small>{new Date(song.createdAt).toLocaleDateString()}</small>
                 <br />
-                {!post.published ? (
-                    <button type="button" onClick={() => publishPost(post._id)}>
+                {!song.published ? (
+                    <button type="button" onClick={() => publishPost(song.id)}>
                         {publishing ? 'Publishing' : 'Publish'}
                     </button>
                 ) : null}
-                <button type="button" onClick={() => deletePost(post['_id'])}>
+                <button type="button" onClick={() => deletePost(song.id)}>
                     {deleting ? 'Deleting' : 'Delete'}
                 </button>
             </li>

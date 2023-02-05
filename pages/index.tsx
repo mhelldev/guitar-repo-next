@@ -1,10 +1,11 @@
 import Head from 'next/head';
 
 import Navigation from '../components/Navigation';
-import PostCard from '../components/PostCard';
+import PostCard, { SongEntry } from '../components/PostCard';
 import styles from '../styles/Home.module.css';
 
-export default function Home({ posts } : any) {
+export default function Home({songs}:any) {
+    console.log(songs)
     return (
         <div>
             <Head>
@@ -15,12 +16,12 @@ export default function Home({ posts } : any) {
 
             <main>
                 <div className={styles.container}>
-                    {posts.length === 0 ? (
+                    {songs.length === 0 ? (
                         <h2>No added posts</h2>
                     ) : (
                         <ul>
-                            {posts.map((post : any, i: number) => (
-                                <PostCard post={post} key={i} />
+                            {songs.map((song : SongEntry, i: number) => (
+                                <PostCard {...song} key={i} />
                             ))}
                         </ul>
                     )}
@@ -39,10 +40,11 @@ export async function getServerSideProps() {
     let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
     // extract the data
     let data = await response.json();
+    console.log(data)
 
     return {
         props: {
-            posts: data['message'],
+            songs: data['message'],
         },
     };
 }

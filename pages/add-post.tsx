@@ -1,35 +1,37 @@
+import {SongEntry, Style } from '@/components/PostCard';
 import { useState } from 'react';
 
 import Navigation from '../components/Navigation';
 import styles from '../styles/Home.module.css';
 
 export default function AddPost() {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+    const [song, setSong] = useState<string>('');
+    const [artist, setArtist] = useState<string>('');
+    const [error, setError] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
 
     const handlePost = async (e: any) => {
         e.preventDefault();
 
         // reset error and message
         setError('');
-        setMessage('');
+        setSong('');
+        setArtist('');
 
         // fields check
-        if (!title || !content) return setError('All fields are required');
+        if (!song || !artist) return setError('All fields are required');
 
         // post structure
-        let post = {
-            title,
-            content,
+        let songEntry: SongEntry = {
+            song,
+            artist,
             published: false,
             createdAt: new Date().toISOString(),
         };
         // save the post
         let response = await fetch('/api/posts', {
             method: 'POST',
-            body: JSON.stringify(post),
+            body: JSON.stringify(songEntry),
         });
 
         // get the data
@@ -37,8 +39,8 @@ export default function AddPost() {
 
         if (data.success) {
             // reset the fields
-            setTitle('');
-            setContent('');
+            setSong('');
+            setArtist('');
             // set the message
             return setMessage(data.message);
         } else {
@@ -63,26 +65,27 @@ export default function AddPost() {
                         </div>
                     ) : null}
                     <div className={styles.formItem}>
-                        <label>Title</label>
+                        <label>Song</label>
                         <input
                             type="text"
-                            name="title"
-                            onChange={(e) => setTitle(e.target.value)}
-                            value={title}
+                            name="song"
+                            onChange={(e) => setSong(e.target.value)}
+                            value={song}
                             placeholder="title"
                         />
                     </div>
                     <div className={styles.formItem}>
-                        <label>Content</label>
-                        <textarea
-                            name="content"
-                            onChange={(e) => setContent(e.target.value)}
-                            value={content}
+                        <label>Artist</label>
+                        <input
+                            type="text"
+                            name="artist"
+                            onChange={(e) => setArtist(e.target.value)}
+                            value={artist}
                             placeholder="Post content"
                         />
                     </div>
                     <div className={styles.formItem}>
-                        <button type="submit">Add post</button>
+                        <button type="submit">Add song</button>
                     </div>
                 </form>
             </div>
