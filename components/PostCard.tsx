@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import styles from '../styles/PostCard.module.css';
 
 export type Style = 'Jazz' | 'Fingerpicking' | 'Blues' | 'Rock/Pop'
 
@@ -14,6 +15,10 @@ export interface SongEntry {
     createdAt: string
     published: boolean
 };
+
+function capitalizeFirstLetter(val: string) {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+}
 
 export default function PostCard(song: SongEntry) {
     const [publishing, setPublishing] = useState(false);
@@ -65,21 +70,17 @@ export default function PostCard(song: SongEntry) {
         }
     };
     return (
-        <>
-            <li>
-                <h3>{song.song} {song.artist}</h3>
-                <p>{song.style}</p>
-                <small>{song.createdAt}</small>
-                <br />
-                {!song.published ? (
-                    <button type="button" onClick={() => publishPost(song.id)}>
-                        {publishing ? 'Publishing' : 'Publish'}
-                    </button>
-                ) : null}
-                <button type="button" onClick={() => deletePost(song.id)}>
-                    {deleting ? 'Deleting' : 'Delete'}
+        <div className={styles.song}>
+            <p><b style={{color: 'darkblue'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
+            <p className={styles.small}>{song.createdAt}</p>
+            {!song.published ? (
+                <button type="button" onClick={() => publishPost(song.id)}>
+                    {publishing ? 'Publishing' : 'Publish'}
                 </button>
-            </li>
-        </>
+            ) : null}
+            <button type="button" onClick={() => deletePost(song.id)}>
+                {deleting ? 'Deleting' : 'Delete'}
+            </button>
+        </div>
     );
 }

@@ -5,7 +5,7 @@ import PostCard, { SongEntry } from '../components/PostCard';
 import styles from '../styles/Home.module.css';
 
 export default function Home({songs}:any) {
-    console.log(songs)
+    
     return (
         <div>
             <Head>
@@ -19,11 +19,10 @@ export default function Home({songs}:any) {
                     {songs.length === 0 ? (
                         <h2>No added posts</h2>
                     ) : (
-                        <ul>
-                            {songs.map((song : SongEntry, i: number) => (
-                                <PostCard {...song} key={i} />
-                            ))}
-                        </ul>
+                        songs.map((song : SongEntry, i: number) => (
+                            <PostCard {...song} key={i} />
+                        ))
+
                     )}
                 </div>
             </main>
