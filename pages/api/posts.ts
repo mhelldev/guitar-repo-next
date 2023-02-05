@@ -40,7 +40,7 @@ async function getPosts(req: any,res: any){
     } catch (error) {
         // return the error
         return res.json({
-            message: new Error(error).message,
+            message: error?.message,
             success: false,
         });
     }
@@ -60,7 +60,7 @@ async function addPost(req: any, res: any) {
     } catch (error) {
         // return an error
         return res.json({
-            message: new Error(error).message,
+            message: error?.message,
             success: false,
         });
     }
