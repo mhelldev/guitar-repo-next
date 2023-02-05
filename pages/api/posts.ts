@@ -88,7 +88,7 @@ async function updatePost(req: any, res: any) {
 
         // return an error
         return res.json({
-            message: new Error(error).message,
+            message: error?.toString(),
             success: false,
         });
     }
@@ -113,7 +113,7 @@ async function deletePost(req: any, res: any) {
 
         // returning an error
         return res.json({
-            message: new Error(error).message,
+            message: error?.toString(),
             success: false,
         });
     }
