@@ -71,7 +71,7 @@ export default function PostCard(song: SongEntry) {
     };
     return (
         <div className={styles.song}>
-            <p><b style={{color: 'darkblue'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
+            <p><b style={{color: '#0700b8'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
             <p className={styles.small}>{song.createdAt}</p>
             {!song.published ? (
                 <button type="button" onClick={() => publishPost(song.id)}>
