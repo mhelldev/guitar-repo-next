@@ -20,7 +20,7 @@ function capitalizeFirstLetter(val: string) {
     return val.charAt(0).toUpperCase() + val.slice(1);
 }
 
-export default function PostCard(song: SongEntry) {
+export function PostCard(song: SongEntry) {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const router = useRouter();
@@ -72,6 +72,10 @@ export default function PostCard(song: SongEntry) {
     return (
         <div className={styles.song}>
             <p><b style={{color: '#0700b8'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
+            <progress max={100} value={song.progress || 0} />
+            <p>{song.style}</p>
+            <p>{song.youtube}</p>
+            <p>{song.ultimateGuitar}</p>
             <p className={styles.small}>{song.createdAt}</p>
             {!song.published ? (
                 <button type="button" onClick={() => publishPost(song.id)}>

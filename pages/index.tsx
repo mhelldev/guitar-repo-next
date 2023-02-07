@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import Navigation from '../components/Navigation';
-import PostCard, { SongEntry } from '../components/PostCard';
+import { SongEntry, PostCard } from '../components/PostCard';
 import styles from '../styles/Home.module.css';
 
 export default function Home({songs}:any) {

@@ -7,6 +7,10 @@ import styles from '../styles/Home.module.css';
 export default function AddPost() {
     const [song, setSong] = useState<string>('');
     const [artist, setArtist] = useState<string>('');
+    const [style, setStyle] = useState<Style>('Rock/Pop')
+    const [progress, setProgress] = useState<number>(0)
+    const [youtube, setYoutube] = useState<string>('');
+    const [ultimateGuitar, setUltimateGuitar] = useState<string>('');
     const [error, setError] = useState<string>('')
     const [message, setMessage] = useState<string>('')
 
@@ -25,6 +29,9 @@ export default function AddPost() {
         let songEntry: SongEntry = {
             song,
             artist,
+            progress,
+            youtube,
+            ultimateGuitar,
             published: false,
             createdAt: new Date().toISOString(),
         };
@@ -81,7 +88,46 @@ export default function AddPost() {
                             name="artist"
                             onChange={(e) => setArtist(e.target.value)}
                             value={artist}
-                            placeholder="Post content"
+                            placeholder="artist"
+                        />
+                    </div>
+                    <div className={styles.formItem}>
+                        <label>Style</label>
+                        <select name="style" id="style" onChange={(e)=> setStyle(e.target.value as Style)}>
+                            <option selected={style === 'Jazz'} value='Jazz'>Jazz</option>
+                            <option selected={style === 'Fingerpicking'} value='Fingerpicking'>Fingerpicking</option>
+                            <option selected={style === 'Blues'} value='Blues'>Blues</option>
+                            <option selected={style === 'Rock/Pop'} value="Rock/Pop">Rock/Pop</option>
+                        </select>
+                    </div>
+                    <div className={styles.formItem}>
+                        <label>Progress</label>
+                        <input
+                            type="number"
+                            name="progress"
+                            onChange={(e) => setProgress(Number.parseFloat(e.target.value))}
+                            value={progress}
+                            placeholder="progress"
+                        />
+                    </div>
+                    <div className={styles.formItem}>
+                        <label>Youtube</label>
+                        <input
+                            type="text"
+                            name="youtube"
+                            onChange={(e) => setYoutube(e.target.value)}
+                            value={youtube}
+                            placeholder="youtube"
+                        />
+                    </div>
+                    <div className={styles.formItem}>
+                        <label>Ultimate Guitar</label>
+                        <input
+                            type="text"
+                            name="ultimateGuitar"
+                            onChange={(e) => setUltimateGuitar(e.target.value)}
+                            value={ultimateGuitar}
+                            placeholder="ultimateGuitar"
                         />
                     </div>
                     <div className={styles.formItem}>
