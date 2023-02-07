@@ -9,7 +9,7 @@ export default function Home({songs}:any) {
     return (
         <div>
             <Head>
-                <title>Home</title>
+                <title>Songbook</title>
             </Head>
 
             <Navigation />
