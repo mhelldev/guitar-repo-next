@@ -15,10 +15,11 @@
 }
 
 .list {
-    padding-top: 0.8em;
+    padding-top: 1.5em;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     list-style-type: none;
+    margin-right: 1em;
 }
 
 .item {
