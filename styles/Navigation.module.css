@@ -6,6 +6,13 @@
     top: 0;
 }
 
+.filter {
+    float: right;
+    clear: right;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
 .title {
     font-size: 2em;
     margin: 0.4em;
