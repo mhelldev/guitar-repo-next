@@ -7,10 +7,11 @@
 }
 
 .title {
-    font-size: 3.5em;
-    margin-left: 0.4em;
+    font-size: 2em;
+    margin: 0.4em;
     color: white;
     float: left;
+    text-shadow: 1px 1px #000000;
 }
 
 .list {
