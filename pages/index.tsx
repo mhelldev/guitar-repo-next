@@ -10,6 +10,7 @@ export default function Home({songs}:any) {
         <div>
             <Head>
                 <title>Songbook</title>
+                <meta name="apple-mobile-web-app-status-bar-style" content="#0700b8"/>
             </Head>
 
             <Navigation />
