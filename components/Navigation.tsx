@@ -19,10 +19,12 @@ export default function Navigation() {
                     </Link>
                 </li>
             </ul>
-            <div><input className={styles.filter} type='button' value={'Jazz'}/></div>
-            <div><input className={styles.filter} type='button' value={'Fingerpicking'}/></div>
-            <div><input className={styles.filter} type='button' value={'Blues'}/></div>
-            <div><input className={styles.filter} type='button' value={'Rock/Pop'}/></div>
+            <div className={styles.filtergroup}>
+                <div><input className={styles.filter} type='button' value={'Jazz'}/></div>
+                <div><input className={styles.filter} type='button' value={'Fingerpicking'}/></div>
+                <div><input className={styles.filter} type='button' value={'Blues'}/></div>
+                <div><input className={styles.filter} type='button' value={'Rock/Pop'}/></div>
+            </div>
         </nav>
         </>
     );
