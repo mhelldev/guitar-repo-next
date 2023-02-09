@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/PostCard.module.css';
+import Image from 'next/image'
+import youtubeimage from '../public/youtube.svg'
+import ultimateimage from '../public/ultimate.png'
 
 export type Style = 'Jazz' | 'Fingerpicking' | 'Blues' | 'Rock/Pop'
 
@@ -48,7 +51,7 @@ export function PostCard(song: SongEntry) {
         }
     };
     // Delete post
-    const deletePost = async (postId: any) => {
+    const deletePost = async (postId: string) => {
         //change deleting state
         setDeleting(true);
 
@@ -74,15 +77,35 @@ export function PostCard(song: SongEntry) {
             <p><b style={{color: '#0700b8'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
             <progress max={100} value={song.progress || 0} />
             <p>{song.style}</p>
-            <p>{song.youtube}</p>
-            <p>{song.ultimateGuitar}</p>
+            {song.youtube &&
+                <div className={styles.image}>
+                    <a href={song.youtube}>
+                        <Image
+                            src={youtubeimage}
+                            alt="Picture of the author"
+                            width={100}
+                            height={100}
+                        /></a>
+                </div>
+            }
+            {song.ultimateGuitar &&
+            <div className={styles.image}>
+                <a href={song.ultimateGuitar}>
+                    <Image
+                        src={ultimateimage}
+                        alt="Picture of the author"
+                        width={100}
+                        height={100}
+                    /></a>
+            </div>
+            }
             <p className={styles.small}>{song.createdAt}</p>
             {!song.published ? (
-                <button type="button" onClick={() => publishPost(song.id)}>
+                <button type="button" onClick={() => window.location.href = `/add-post?id=${song.id}`}>
                     {publishing ? 'Publishing' : 'Publish'}
                 </button>
             ) : null}
-            <button type="button" onClick={() => deletePost(song.id)}>
+            <button type="button" onClick={() => deletePost(song.id || '0')}>
                 {deleting ? 'Deleting' : 'Delete'}
             </button>
         </div>

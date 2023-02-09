@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Navigation from '../components/Navigation';
 import styles from '../styles/Home.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function AddPost() {
     const [song, setSong] = useState<string>('');
@@ -34,6 +35,7 @@ export default function AddPost() {
             ultimateGuitar,
             published: false,
             createdAt: new Date().toISOString(),
+            id: uuidv4(),
         };
         // save the post
         let response = await fetch('/api/posts', {

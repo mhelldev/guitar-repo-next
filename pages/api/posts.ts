@@ -101,7 +101,7 @@ async function deletePost(req: any, res: any) {
 
         // Deleting the post
         await db.collection('posts').deleteOne({
-            _id: new ObjectId(req.body),
+            id: req.body,
         });
 
         // returning a message
