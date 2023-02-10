@@ -1,6 +1,8 @@
 .song {
  margin-bottom: 3em;
  min-width: 200px;
+ float: left;
+ margin-right: 3em;
 }
 
 .small {
