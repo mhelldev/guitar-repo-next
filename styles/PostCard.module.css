@@ -8,8 +8,8 @@
 }
 
 .image {
-    width: 100px;
-    margin: 0;
+    float: left;
+    margin-right: 1em;
     padding: 0;
     border: 1px solid black
 }

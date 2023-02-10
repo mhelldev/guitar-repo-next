@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/PostCard.module.css';
 import Image from 'next/image'
-import youtubeimage from '../public/youtube.svg'
+import youtubeimage from '../public/youtube.png'
 import ultimateimage from '../public/ultimate.png'
 
 export type Style = 'Jazz' | 'Fingerpicking' | 'Blues' | 'Rock/Pop'
@@ -83,8 +83,7 @@ export function PostCard(song: SongEntry) {
                         <Image
                             src={youtubeimage}
                             alt="Picture of the author"
-                            width={100}
-                            height={100}
+                            height={50}
                         /></a>
                 </div>
             }
@@ -94,12 +93,10 @@ export function PostCard(song: SongEntry) {
                     <Image
                         src={ultimateimage}
                         alt="Picture of the author"
-                        width={100}
-                        height={100}
+                        height={50}
                     /></a>
             </div>
             }
-            <p className={styles.small}>{song.createdAt}</p>
             {!song.published ? (
                 <button type="button" onClick={() => window.location.href = `/add-post?id=${song.id}`}>
                     {publishing ? 'Publishing' : 'Publish'}
