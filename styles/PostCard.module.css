@@ -11,5 +11,14 @@
     float: left;
     margin-right: 1em;
     padding: 0;
-    border: 1px solid black
+    border: 1px solid black;
+    background: white;
+}
+
+.imageblackbg {
+    float: left;
+    margin-right: 1em;
+    padding: 0;
+    border: 1px solid black;
+    background: black;
 }

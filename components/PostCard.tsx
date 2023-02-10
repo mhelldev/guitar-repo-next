@@ -88,7 +88,7 @@ export function PostCard(song: SongEntry) {
                 </div>
             }
             {song.ultimateGuitar &&
-            <div className={styles.image}>
+            <div className={styles.imageblackbg}>
                 <a href={song.ultimateGuitar}>
                     <Image
                         src={ultimateimage}
