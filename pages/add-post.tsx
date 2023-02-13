@@ -1,11 +1,13 @@
 import {SongEntry, Style } from '@/components/PostCard';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 
 import Navigation from '../components/Navigation';
 import styles from '../styles/Home.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/dist/client/router';
 
-export default function AddPost() {
+export default function AddPost({songs}:any) {
+
     const [song, setSong] = useState<string>('');
     const [artist, setArtist] = useState<string>('');
     const [style, setStyle] = useState<Style>('Rock/Pop')
@@ -14,6 +16,23 @@ export default function AddPost() {
     const [ultimateGuitar, setUltimateGuitar] = useState<string>('');
     const [error, setError] = useState<string>('')
     const [message, setMessage] = useState<string>('')
+
+    const router = useRouter()
+    const queryId = router.query.id
+
+    useEffect(() =>  {
+        if (queryId) {
+            const querySong: SongEntry = songs.find((s: SongEntry) => s.id === queryId)
+            if (querySong) {
+                setSong(querySong.song)
+                setArtist(querySong.artist)
+                setStyle(querySong.style || 'Rock/Pop')
+                setYoutube(querySong.youtube || '')
+                setUltimateGuitar(querySong.ultimateGuitar || '')
+                setProgress(querySong.progress || 0)
+            }
+        }
+    }, [])
 
     const handlePost = async (e: any) => {
         e.preventDefault();
@@ -139,4 +158,21 @@ export default function AddPost() {
             </div>
         </div>
     );
+}
+
+export async function getServerSideProps() {
+    // get the current environment
+    let dev = process.env.NODE_ENV !== 'production';
+    let { DEV_URL, PROD_URL } = process.env;
+
+    // request posts from api
+    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
+    // extract the data
+    let data = await response.json();
+
+    return {
+        props: {
+            songs: data['message'],
+        },
+    };
 }
