@@ -54,6 +54,7 @@ export default function AddPost({songs}:any) {
             progress,
             youtube,
             ultimateGuitar,
+            style,
             published: false,
             createdAt: new Date().toISOString(),
             id: songId === '' ? uuidv4() : songId,
