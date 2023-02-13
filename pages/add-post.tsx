@@ -8,6 +8,7 @@ import { useRouter } from 'next/dist/client/router';
 
 export default function AddPost({songs}:any) {
 
+    const [songId, setSongId] = useState<string>('')
     const [song, setSong] = useState<string>('');
     const [artist, setArtist] = useState<string>('');
     const [style, setStyle] = useState<Style>('Rock/Pop')
@@ -24,6 +25,7 @@ export default function AddPost({songs}:any) {
         if (queryId) {
             const querySong: SongEntry = songs.find((s: SongEntry) => s.id === queryId)
             if (querySong) {
+                setSongId(querySong.id || '')
                 setSong(querySong.song)
                 setArtist(querySong.artist)
                 setStyle(querySong.style || 'Rock/Pop')
@@ -54,13 +56,22 @@ export default function AddPost({songs}:any) {
             ultimateGuitar,
             published: false,
             createdAt: new Date().toISOString(),
-            id: uuidv4(),
+            id: songId === '' ? uuidv4() : songId,
         };
-        // save the post
-        let response = await fetch('/api/posts', {
-            method: 'POST',
-            body: JSON.stringify(songEntry),
-        });
+        let response
+        if (songId === '') {
+            // save the post
+            response = await fetch('/api/posts', {
+                method: 'POST',
+                body: JSON.stringify(songEntry),
+            });
+        } else {
+            // save the post
+            response = await fetch('/api/posts', {
+                method: 'PUT',
+                body: JSON.stringify(songEntry),
+            });
+        }
 
         // get the data
         let data = await response.json();

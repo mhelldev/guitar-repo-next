@@ -72,12 +72,12 @@ async function updatePost(req: any, res: any) {
         let { db } = await connectToDatabase();
 
         // update the published status of the post
-        await db.collection('posts').updateOne(
-            {
-                _id: new ObjectId(req.body),
-            },
-            { $set: { published: true } }
-        );
+        const songEntry = JSON.parse(req.body)
+        await db.collection('posts').updateOne({id: songEntry.id},  {
+            $set: {
+                ...songEntry
+            }
+        })
 
         // return a message
         return res.json({
