@@ -75,7 +75,7 @@ export function PostCard(song: SongEntry) {
     return (
         <div className={styles.song}>
             <p><b style={{color: '#0700b8'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
-            <progress max={100} value={song.progress || 0} />
+            <div className={styles.progress}><b>{song.progress}%</b><progress max={100} value={song.progress || 0} /></div>
             <p>{song.style}</p>
             {song.youtube &&
                 <div className={styles.image}>

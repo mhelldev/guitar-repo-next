@@ -3,6 +3,7 @@
     top: 0;
     background: white;
     height: 6em;
+    border-bottom: 1px solid gray;
 }
 .nav {
     width: 100%;
