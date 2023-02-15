@@ -74,6 +74,13 @@ export function PostCard(song: SongEntry) {
     };
     return (
         <div className={styles.song}>
+            <div className={styles.image}>
+                <a href={song.youtube}>
+                    <img
+                        src={`https://img.youtube.com/vi/${song.youtube ? song.youtube.slice(song.youtube.indexOf('v=')+2) : 1}/default.jpg`}
+                        alt="Picture of the author"
+                    /></a>
+            </div>
             <p><b style={{color: '#0700b8'}}>{capitalizeFirstLetter(song.song)}</b> <b>{capitalizeFirstLetter(song.artist)}</b></p>
             <div className={styles.progress}><b>{song.progress}%</b><progress max={100} value={song.progress || 0} /></div>
             <p>{song.style}</p>
@@ -99,7 +106,7 @@ export function PostCard(song: SongEntry) {
             }
             {!song.published ? (
                 <button type="button" onClick={() => window.location.href = `/add-post?id=${song.id}`}>
-                    {publishing ? 'Publishing' : 'Publish'}
+                    {publishing ? 'Updating' : 'Update'}
                 </button>
             ) : null}
             <button type="button" onClick={() => deletePost(song.id || '0')}>
